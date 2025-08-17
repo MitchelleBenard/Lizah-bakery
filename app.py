@@ -19,8 +19,6 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.secret_key = os.getenv("SECRET_KEY", "dev")
 
 # --- Settings ---
-EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS", "enmkitchen408@gmail.com")
-EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD", "YOUR_APP_PASSWORD")
 WHATSAPP_PHONE = os.getenv("WHATSAPP_PHONE", "254113211652")
 WHATSAPP_API_KEY = os.getenv("WHATSAPP_API_KEY", "123456")
 
@@ -124,8 +122,8 @@ def order():
         data = {field: request.form.get(field, "") for field in FIELDS}
         message_text = format_order_message(data)
         
-        # Send email & WhatsApp
-        send_email_if_configured(message_text)
+        # Send WhatsApp
+       # send_email_if_configured(message_text)
         send_whatsapp_if_configured(message_text)
         
         # Save to database
@@ -178,11 +176,9 @@ def sitemap():
 
 # --- Run App ---
 if __name__ == "__main__":
-    init_db()  # ensures table exists
-    print("🚀 ENM Kitchen app running at http://127.0.0.1:5000")
-    app.run(debug=True)
-
-
+    init_db()
+    print("🚀 ENM Kitchen app running...")
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True)
 
 
 
