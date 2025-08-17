@@ -151,7 +151,52 @@
       font-size:32px;
       display:inline-block;
     }
-  </style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #fff8ee;
+    margin: 0;
+    padding: 20px;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 1200px; /* limits content width on desktop */
+    margin: 0 auto;
+    padding: 0 10px;   /* some padding on small screens */
+}
+
+input, textarea, select, button {
+    width: 100%; /* full width for mobile */
+    box-sizing: border-box; /* includes padding in width */
+}
+@media screen and (max-width: 600px) {
+    h1, h2 {
+        font-size: 1.5em; /* smaller headings */
+    }
+
+    body {
+        font-size: 14px; /* smaller text on phones */
+        padding: 10px;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 16px;
+    }
+}
+.cakes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENM Kitchen | Our Cakes</title>
+    <meta name="description" content="View our delicious cakes at ENM Kitchen. Order birthday, vegan, chocolate, and specialty cakes online for delivery or pickup.">
+    <meta name="keywords" content="our cakes, cake gallery, birthday cake, vegan cake, chocolate cake, ENM Kitchen">
+    <meta name="author" content="ENM Kitchen">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="page">

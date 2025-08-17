@@ -42,34 +42,73 @@
         button:hover { 
             background: #ff4da6; 
         }
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #fff8ee;
+    margin: 0;
+    padding: 20px;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 1200px; /* limits content width on desktop */
+    margin: 0 auto;
+    padding: 0 10px;   /* some padding on small screens */
+}
+
+input, textarea, select, button {
+    width: 100%; /* full width for mobile */
+    box-sizing: border-box; /* includes padding in width */
+}
+@media screen and (max-width: 600px) {
+    h1, h2 {
+        font-size: 1.5em; /* smaller headings */
+    }
+
+    body {
+        font-size: 14px; /* smaller text on phones */
+        padding: 10px;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 16px;
+    }
+}
+.cakes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
     </style>
 </head>
 
 <body>
+   <div class="container">
     <h2>Cake Order Form</h2>
     <form method="POST" action="/order">
         <!-- Client Info -->
-        <label>Client Name:</label>
-        <input type="text" name="client" placeholder="Your full name" required>
+        <label for="client">Client Name:</label>
+        <input type="text" id="client" name="client" placeholder="Your full name" required>
 
-        <label>Phone Number:</label>
-        <input type="tel" name="phone" placeholder="07XXXXXXXX" required>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" placeholder="07XXXXXXXX" required>
 
         <!-- Cake Details -->
-        <label>Cake Flavour:</label>
-        <input type="text" name="cake_flavour" placeholder="Chocolate, Vanilla, Red Velvet..." required>
+        <label for="cake_flavour">Cake Flavour:</label>
+        <input type="text" id="cake_flavour" name="cake_flavour" placeholder="Chocolate, Vanilla, Red Velvet..." required>
 
-        <label>Size:</label>
-        <input type="text" name="size" placeholder="Small, Medium, Large..." required>
+        <label for="size">Size:</label>
+        <input type="text" id="size" name="size" placeholder="Small, Medium, Large..." required>
 
-        <label>Colour:</label>
-        <input type="text" name="colour" placeholder="Your preferred color">
+        <label for="colour">Colour:</label>
+        <input type="text" id="colour" name="colour" placeholder="Your preferred color">
 
-        <label>Details:</label>
-        <textarea name="details" placeholder="Any special instructions"></textarea>
+        <label for="details">Details:</label>
+        <textarea id="details" name="details" placeholder="Any special instructions"></textarea>
 
-        <label>Icing:</label>
-        <select name="icing">
+        <label for="icing">Icing:</label>
+        <select id="icing" name="icing">
             <option value="">--Select Icing--</option>
             <option value="Buttercream">Buttercream</option>
             <option value="Fondant">Fondant</option>
@@ -77,33 +116,35 @@
             <option value="Chocolate Ganache">Chocolate Ganache</option>
         </select>
 
-        <label>Delivery Method:</label>
-        <select name="delivery">
+        <label for="delivery">Delivery Method:</label>
+        <select id="delivery" name="delivery">
             <option value="">--Select Delivery--</option>
             <option value="Pickup">Pickup</option>
             <option value="Home Delivery">Home Delivery</option>
         </select>
 
-        <label>Date:</label>
-        <input type="date" name="date" required>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
 
-        <label>Time:</label>
-        <input type="time" name="time" required>
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" required>
 
-        <label>Location:</label>
-        <input type="text" name="location" placeholder="Address for delivery if home delivery">
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" placeholder="Address for delivery if home delivery">
 
-        <label>Writings on Cake:</label>
-        <input type="text" name="writings" placeholder="Happy Birthday, Congrats, etc.">
+        <label for="writings">Writings on Cake:</label>
+        <input type="text" id="writings" name="writings" placeholder="Happy Birthday, Congrats, etc.">
 
-        <label>Amount (Ksh):</label>
-        <input type="number" name="amount" placeholder="Total cake amount" required>
+        <label for="amount">Amount (Ksh):</label>
+        <input type="number" id="amount" name="amount" placeholder="Total cake amount" required>
 
-        <label>Deposit (Ksh):</label>
-        <input type="number" name="deposit" placeholder="Enter deposit amount (optional)">
+        <label for="deposit">Deposit (Ksh):</label>
+        <input type="number" id="deposit" name="deposit" placeholder="Enter deposit amount (optional)">
 
         <button type="submit">Submit Order</button>
     </form>
+</div>
+
 </body>
 </html>
 
