@@ -1,8 +1,6 @@
-from flask import Flask, request, render_template, redirect, url_for, abort
+from flask import Flask, request, render_template, redirect, url_for, abort, Response
 from jinja2 import TemplateNotFound
 import os
-import smtplib
-from email.mime.text import MIMEText
 import urllib.parse
 import requests
 import sqlite3  # database
@@ -19,8 +17,8 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.secret_key = os.getenv("SECRET_KEY", "dev")
 
 # --- Settings ---
-WHATSAPP_PHONE = os.getenv("WHATSAPP_PHONE", "254113211652")
-WHATSAPP_API_KEY = os.getenv("WHATSAPP_API_KEY", "123456")
+WHATSAPP_PHONE = os.getenv("WHATSAPP_PHONE")
+WHATSAPP_API_KEY = os.getenv("WHATSAPP_API_KEY")
 
 FIELDS = [
     "client", "phone", "cake_flavour", "size", "colour", "details", "icing",
@@ -29,7 +27,7 @@ FIELDS = [
 ]
 
 # --- Database helper ---
-DB_FILE = "orders.db"  # use your actual DB
+DB_FILE = "orders.db"
 
 def get_db_connection():
     conn = sqlite3.connect(DB_FILE)
@@ -60,7 +58,7 @@ def init_db():
     conn.commit()
     conn.close()
 
-# --- Email & WhatsApp helpers ---
+# --- Helper functions ---
 def format_order_message(data: dict) -> str:
     lines = ["--- New Cake Order ---"]
     for k in FIELDS:
@@ -69,25 +67,9 @@ def format_order_message(data: dict) -> str:
     lines.append("----------------------")
     return "\n".join(lines)
 
-def send_email_if_configured(message_text: str) -> None:
-    if not EMAIL_ADDRESS or not EMAIL_PASSWORD or EMAIL_PASSWORD == "YOUR_APP_PASSWORD":
-        print("ℹ️ Email not sent (missing EMAIL_PASSWORD or using placeholder).")
-        return
-    msg = MIMEText(message_text)
-    msg["Subject"] = "New Cake Order - ENM Kitchen"
-    msg["From"] = EMAIL_ADDRESS
-    msg["To"] = EMAIL_ADDRESS
-    try:
-        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-            server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-            server.send_message(msg)
-        print("✅ Email sent successfully.")
-    except Exception as e:
-        print(f"❌ Email sending failed: {e}")
-
 def send_whatsapp_if_configured(message_text: str) -> None:
-    if not WHATSAPP_PHONE or not WHATSAPP_API_KEY or WHATSAPP_API_KEY == "123456":
-        print("ℹ️ WhatsApp not sent (missing/placeholder API key).")
+    if not WHATSAPP_PHONE or not WHATSAPP_API_KEY:
+        print("ℹ️ WhatsApp not sent (missing API key).")
         return
     try:
         encoded = urllib.parse.quote_plus(message_text)
@@ -122,8 +104,7 @@ def order():
         data = {field: request.form.get(field, "") for field in FIELDS}
         message_text = format_order_message(data)
         
-        # Send WhatsApp
-       # send_email_if_configured(message_text)
+        # Send WhatsApp (only if credentials exist)
         send_whatsapp_if_configured(message_text)
         
         # Save to database
@@ -161,7 +142,6 @@ def view_orders():
     orders = conn.execute("SELECT * FROM orders").fetchall()
     conn.close()
     return render_template("view_orders.html", orders=orders)
-from flask import Response
 
 # --- Sitemap route ---
 @app.route("/sitemap.xml", methods=["GET"])
@@ -173,14 +153,11 @@ def sitemap():
     except FileNotFoundError:
         return Response("<urlset></urlset>", mimetype="application/xml")
 
-
 # --- Run App ---
 if __name__ == "__main__":
     init_db()
     print("🚀 ENM Kitchen app running...")
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True)
-
-
 
 
 
