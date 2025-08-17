@@ -4,29 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ENM Kitchen | Order Cakes Online</title>
-    <meta name="description" content="ENM Kitchen - Order birthday cakes, vegan cakes, chocolate cakes, and more online. Delivered to your door.">
-    <meta name="keywords" content="cakes, online cake order, birthday cake, vegan cake, chocolate cake, ENM Kitchen, cake delivery">
+    <meta name="description" content="Order cakes online from ENM Kitchen. Birthday cakes, vegan cakes, chocolate cakes, and more delivered to your door.">
+    <meta name="keywords" content="cakes, cake order online, birthday cake, vegan cake, chocolate cake, cake delivery, custom cakes, ENM Kitchen">
     <meta name="author" content="ENM Kitchen">
 
     <style>
         body { 
             font-family: Arial, sans-serif; 
             background-color: #fff8ee; 
-            padding: 40px; 
-            font-size: 18px; 
+            margin:0;
+            padding: 20px; 
+            font-size: 16px; 
+            line-height:1.5;
+            box-sizing:border-box;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #4b2e1e;
+            margin-bottom: 20px;
         }
 
         label { 
             display: block; 
             margin-top: 10px; 
-            font-size: 18px; 
+            font-weight: bold;
+            font-size: 1em; 
         }
 
         input, textarea, select { 
             width: 100%; 
             padding: 10px; 
             margin-top: 5px; 
-            font-size: 16px; 
+            font-size: 1em; 
+            border:1px solid #ccc;
+            border-radius:6px;
+            box-sizing: border-box;
+        }
+
+        textarea { 
+            resize: vertical; 
+            min-height: 80px; 
         }
 
         button { 
@@ -36,50 +60,28 @@
             border: none; 
             color: white; 
             cursor: pointer; 
-            font-size: 18px; 
+            font-size: 1em; 
+            border-radius:8px;
+            transition: background 0.3s ease;
         }
 
         button:hover { 
             background: #ff4da6; 
         }
-        body {
-    font-family: Arial, sans-serif;
-    background-color: #fff8ee;
-    margin: 0;
-    padding: 20px;
-    font-size: 16px;
-}
 
-.container {
-    max-width: 1200px; /* limits content width on desktop */
-    margin: 0 auto;
-    padding: 0 10px;   /* some padding on small screens */
-}
-
-input, textarea, select, button {
-    width: 100%; /* full width for mobile */
-    box-sizing: border-box; /* includes padding in width */
-}
-@media screen and (max-width: 600px) {
-    h1, h2 {
-        font-size: 1.5em; /* smaller headings */
-    }
-
-    body {
-        font-size: 14px; /* smaller text on phones */
-        padding: 10px;
-    }
-
-    button {
-        padding: 12px;
-        font-size: 16px;
-    }
-}
-.cakes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-}
+        @media screen and (max-width: 600px) {
+            body {
+                font-size: 14px;
+                padding: 10px;
+            }
+            h2 {
+                font-size: 1.5em;
+            }
+            button {
+                padding: 12px;
+                font-size: 0.95em;
+            }
+        }
     </style>
 </head>
 
@@ -99,7 +101,7 @@ input, textarea, select, button {
         <input type="text" id="cake_flavour" name="cake_flavour" placeholder="Chocolate, Vanilla, Red Velvet..." required>
 
         <label for="size">Size:</label>
-        <input type="text" id="size" name="size" placeholder="Small, Medium, Large..." required>
+        <input type="text" id="size" name="size" placeholder="1kg, 2kg, 3kg..." required>
 
         <label for="colour">Colour:</label>
         <input type="text" id="colour" name="colour" placeholder="Your preferred color">
@@ -114,13 +116,16 @@ input, textarea, select, button {
             <option value="Fondant">Fondant</option>
             <option value="Whipped Cream">Whipped Cream</option>
             <option value="Chocolate Ganache">Chocolate Ganache</option>
+            <option value="Chocolate Ganache">hard</option>
+            <option value="Chocolate Ganache">soft</option>
+
         </select>
 
         <label for="delivery">Delivery Method:</label>
         <select id="delivery" name="delivery">
             <option value="">--Select Delivery--</option>
             <option value="Pickup">Pickup</option>
-            <option value="Home Delivery">Home Delivery</option>
+            <option value="Delivery">Delivery</option>
         </select>
 
         <label for="date">Date:</label>
@@ -135,9 +140,6 @@ input, textarea, select, button {
         <label for="writings">Writings on Cake:</label>
         <input type="text" id="writings" name="writings" placeholder="Happy Birthday, Congrats, etc.">
 
-        <label for="amount">Amount (Ksh):</label>
-        <input type="number" id="amount" name="amount" placeholder="Total cake amount" required>
-
         <label for="deposit">Deposit (Ksh):</label>
         <input type="number" id="deposit" name="deposit" placeholder="Enter deposit amount (optional)">
 
@@ -147,6 +149,7 @@ input, textarea, select, button {
 
 </body>
 </html>
+
 
 
 

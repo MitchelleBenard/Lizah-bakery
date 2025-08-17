@@ -4,106 +4,135 @@
     <meta charset="UTF-8">
     <title>View Orders - Admin</title>
     <style>
+        /* --- General Body --- */
         body {
             font-family: Arial, sans-serif;
             background-color: #fff8ee;
+            margin: 0;
             padding: 20px;
+            font-size: 16px;
+            box-sizing: border-box;
         }
+
+        /* --- Page Container --- */
+        .container {
+            max-width: 1200px; /* limits content width on desktop */
+            margin: 0 auto;
+            padding: 0 10px;   /* small horizontal padding */
+        }
+
+        /* --- Table Container for Horizontal Scroll --- */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        /* --- Table Styling --- */
         table {
             border-collapse: collapse;
             width: 100%;
+            min-width: 800px; /* ensures table stays scrollable */
         }
+
         th, td {
             border: 1px solid #5a3e2b;
             padding: 8px;
             text-align: left;
         }
+
         th {
             background-color: #ff69b4;
             color: white;
         }
+
         tr:nth-child(even) {
             background-color: #ffe4f0;
         }
-        body {
-    font-family: Arial, sans-serif;
-    background-color: #fff8ee;
-    margin: 0;
-    padding: 20px;
-    font-size: 16px;
-}
 
-.container {
-    max-width: 1200px; /* limits content width on desktop */
-    margin: 0 auto;
-    padding: 0 10px;   /* some padding on small screens */
-}
+        /* --- Form Inputs and Buttons (if any) --- */
+        input, textarea, select, button {
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
 
-input, textarea, select, button {
-    width: 100%; /* full width for mobile */
-    box-sizing: border-box; /* includes padding in width */
-}
-@media screen and (max-width: 600px) {
-    h1, h2 {
-        font-size: 1.5em; /* smaller headings */
-    }
+        button {
+            padding: 12px;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-    body {
-        font-size: 14px; /* smaller text on phones */
-        padding: 10px;
-    }
+        /* --- Cakes Grid (if used) --- */
+        .cakes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
 
-    button {
-        padding: 12px;
-        font-size: 16px;
-    }
-}
-.cakes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-}
+        /* --- Responsive Styles --- */
+        @media screen and (max-width: 768px) {
+            h1, h2, h3 {
+                font-size: 1.5em;
+            }
+
+            body {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            table th, table td {
+                padding: 6px;
+                font-size: 14px;
+            }
+
+            .cakes-grid {
+                gap: 10px;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>All Cake Orders (Admin)</h1>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Client Name</th>
-            <th>Phone Number</th>
-            <th>Cake Flavour</th>
-            <th>Size</th>
-            <th>Colour</th>
-            <th>Details</th>
-            <th>Icing</th>
-            <th>Delivery</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Location</th>
-            <th>Writings</th>
-            <th>Amount</th>
-            <th>Deposit</th>
-        </tr>
-        {% for order in orders %}
-        <tr>
-            <td>{{ order['id'] }}</td>
-            <td>{{ order['client'] }}</td>
-            <td>{{ order['phone'] }}</td>
-            <td>{{ order['cake_flavour'] }}</td>
-            <td>{{ order['size'] }}</td>
-            <td>{{ order['colour'] }}</td>
-            <td>{{ order['details'] }}</td>
-            <td>{{ order['icing'] }}</td>
-            <td>{{ order['delivery'] }}</td>
-            <td>{{ order['date'] }}</td>
-            <td>{{ order['time'] }}</td>
-            <td>{{ order['location'] }}</td>
-            <td>{{ order['writings'] }}</td>
-            <td>{{ order['amount'] }}</td>
-            <td>{{ order['deposit'] }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    <div class="container">
+        <h1>All Cake Orders (Admin)</h1>
+        <div class="table-wrapper">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Client Name</th>
+                    <th>Phone Number</th>
+                    <th>Cake Flavour</th>
+                    <th>Size</th>
+                    <th>Colour</th>
+                    <th>Details</th>
+                    <th>Icing</th>
+                    <th>Delivery</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Location</th>
+                    <th>Writings</th>
+                    <th>Amount</th>
+                    <th>Deposit</th>
+                </tr>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order['id'] }}</td>
+                    <td>{{ order['client'] }}</td>
+                    <td>{{ order['phone'] }}</td>
+                    <td>{{ order['cake_flavour'] }}</td>
+                    <td>{{ order['size'] }}</td>
+                    <td>{{ order['colour'] }}</td>
+                    <td>{{ order['details'] }}</td>
+                    <td>{{ order['icing'] }}</td>
+                    <td>{{ order['delivery'] }}</td>
+                    <td>{{ order['date'] }}</td>
+                    <td>{{ order['time'] }}</td>
+                    <td>{{ order['location'] }}</td>
+                    <td>{{ order['writings'] }}</td>
+                    <td>{{ order['amount'] }}</td>
+                    <td>{{ order['deposit'] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 </body>
 </html>

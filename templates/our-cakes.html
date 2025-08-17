@@ -4,42 +4,47 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>ENM Kitchen – Our Cakes</title>
+  <meta name="description" content="View our delicious cakes at ENM Kitchen. Order birthday, vegan, chocolate, and specialty cakes online for delivery or pickup.">
+  <meta name="keywords" content="our cakes, cake gallery, birthday cake, vegan cake, chocolate cake, ENM Kitchen">
+  <meta name="author" content="ENM Kitchen">
   <style>
-    /* ----- Base ----- */
     :root{
       --brown:#4b2e1e;
       --tan:#e6d3b3;
       --accent:#8b4513;
     }
+
     html, body {
-      background:#ffffff;           /* White page */
+      background:#ffffff;
       color:#2b2b2b;
       margin:0;
-      padding:0;
+      padding:20px;
       font-family: Arial, Helvetica, sans-serif;
-      font-size:30px;               /* 30+ base font as requested */
+      font-size:16px;
       line-height:1.35;
-    }
-    .page {
-      padding:28px 24px 60px 24px;  /* left aligned layout */
-      max-width:1100px;             /* readable line length */
+      box-sizing: border-box;
     }
 
-    /* ----- Header + Note ----- */
+    .page {
+      padding:28px 24px 60px 24px;
+      max-width:1100px;
+      margin:0 auto;
+    }
+
     h1 {
       margin:0 0 8px 0;
       color:var(--brown);
-      font-size:56px;               /* big headline */
+      font-size:2.5em;
       font-weight:800;
       letter-spacing:.5px;
     }
+
     .page-note{
       margin:0 0 24px 0;
       color:#594a40;
-      font-size:32px;
+      font-size:1.2em;
     }
 
-    /* ----- Filters ----- */
     .filters{
       display:flex;
       flex-wrap:wrap;
@@ -51,24 +56,27 @@
       display:flex;
       align-items:center;
       gap:10px;
+      flex:1 1 200px;
     }
     label{
       color:#3a2a20;
-      font-size:32px;
+      font-size:1em;
       font-weight:700;
     }
     select{
-      font-size:32px;               /* big controls */
-      padding:12px 18px;
+      font-size:1em;
+      padding:8px 12px;
       border:2px solid var(--tan);
       border-radius:12px;
       background:#fff;
       color:#2b2b2b;
       cursor:pointer;
+      width:100%;
+      box-sizing:border-box;
     }
     .btn{
-      font-size:30px;
-      padding:12px 18px;
+      font-size:1em;
+      padding:10px 14px;
       border-radius:12px;
       border:2px solid var(--accent);
       background:var(--accent);
@@ -80,30 +88,29 @@
       color:var(--accent);
     }
 
-    /* ----- Cake List (vertical stack) ----- */
     .cake-list{
       display:flex;
-      flex-direction:column;        /* vertical arrangement */
+      flex-direction:column;
       gap:18px;
-      align-items:flex-start;       /* left aligned */
+      align-items:flex-start;
       margin-top:10px;
     }
     .cake-card{
       width:100%;
-      max-width:980px;              /* neat readable width */
       display:grid;
-      grid-template-columns: 220px 1fr auto; /* image | name | actions */
-      gap:18px;
+      grid-template-columns: 1fr auto;
+      gap:12px;
       align-items:center;
       background:#fff;
       border:2px solid var(--tan);
       border-radius:18px;
-      padding:18px;
+      padding:12px;
       box-shadow:0 6px 16px rgba(0,0,0,.06);
     }
     .cake-card img{
-      width:220px;
-      height:160px;
+      width:100%;
+      max-width:220px;
+      height:auto;
       object-fit:cover;
       border-radius:14px;
       background:#f7f7f7;
@@ -112,7 +119,7 @@
     .cake-card h3{
       margin:0;
       color:#2e2018;
-      font-size:36px;               /* big names */
+      font-size:1.2em;
       font-weight:800;
     }
     .order-actions{
@@ -127,18 +134,17 @@
       text-align:center;
       padding:10px 14px;
       border-radius:12px;
-      font-size:30px;
+      font-size:1em;
       border:2px solid var(--accent);
       color:#fff;
       background:var(--accent);
-      min-width:210px;
+      min-width:140px;
     }
     .order-actions a.call{
       background:#fff;
       color:var(--accent);
     }
 
-    /* ----- Footer CTA ----- */
     .custom-order{
       margin-top:26px;
     }
@@ -148,55 +154,19 @@
       color:#fff;
       padding:14px 20px;
       border-radius:14px;
-      font-size:32px;
+      font-size:1.2em;
       display:inline-block;
     }
-    body {
-    font-family: Arial, sans-serif;
-    background-color: #fff8ee;
-    margin: 0;
-    padding: 20px;
-    font-size: 16px;
-}
 
-.container {
-    max-width: 1200px; /* limits content width on desktop */
-    margin: 0 auto;
-    padding: 0 10px;   /* some padding on small screens */
-}
-
-input, textarea, select, button {
-    width: 100%; /* full width for mobile */
-    box-sizing: border-box; /* includes padding in width */
-}
-@media screen and (max-width: 600px) {
-    h1, h2 {
-        font-size: 1.5em; /* smaller headings */
+    @media screen and (max-width: 768px){
+      h1 { font-size:1.8em; }
+      .page-note { font-size:1em; }
+      .filters { flex-direction:column; gap:10px; }
+      .cake-card { grid-template-columns:1fr; gap:10px; }
+      .cake-card img { max-width:100%; height:auto; }
+      .order-actions { flex-direction:row; gap:8px; }
     }
-
-    body {
-        font-size: 14px; /* smaller text on phones */
-        padding: 10px;
-    }
-
-    button {
-        padding: 12px;
-        font-size: 16px;
-    }
-}
-.cakes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-}
-</style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ENM Kitchen | Our Cakes</title>
-    <meta name="description" content="View our delicious cakes at ENM Kitchen. Order birthday, vegan, chocolate, and specialty cakes online for delivery or pickup.">
-    <meta name="keywords" content="our cakes, cake gallery, birthday cake, vegan cake, chocolate cake, ENM Kitchen">
-    <meta name="author" content="ENM Kitchen">
-    <link rel="stylesheet" href="style.css">
+  </style>
 </head>
 <body>
   <div class="page">
@@ -206,7 +176,6 @@ input, textarea, select, button {
       and also list any matching options. Tap WhatsApp or Call to order.
     </p>
 
-    <!-- Filters -->
     <div class="filters">
       <div class="filter-group">
         <label for="categoryFilter">Category:</label>
@@ -249,17 +218,14 @@ input, textarea, select, button {
       <button class="btn secondary" onclick="clearFilters()">Clear</button>
     </div>
 
-    <!-- Cards -->
     <div id="cakeList" class="cake-list"></div>
 
-    <!-- Bottom CTA (Flask route ready) -->
     <div class="custom-order">
       <a href="{{ url_for('order') }}">Order a Customized Cake</a>
     </div>
   </div>
 
   <script>
-    // --- Sample catalog (increased items) ---
     const cakes = [
       { name:"Chocolate Birthday Cake", category:"chocolate", occasion:"birthday", img:"images/chocolate_birthday.jpg" },
       { name:"Vanilla Wedding Cake", category:"glutenfree", occasion:"wedding", img:"images/vanilla_wedding.jpg" },
@@ -326,23 +292,19 @@ input, textarea, select, button {
       const list = id("cakeList");
       list.innerHTML = "";
 
-      // 1) Always create a formed card when at least one filter is chosen
       if (category || occasion){
         const formedName = formedSelectionName(category, occasion);
         list.appendChild(renderCard(formedName, PLACEHOLDER));
       }
 
-      // 2) Show matching catalog items (works with both filters, or one, or none)
       const results = cakes.filter(c =>
         (category === "" || c.category === category) &&
         (occasion === "" || c.occasion === occasion)
       );
 
-      // If no filters selected, results == all cakes (so page looks full)
       results.forEach(c => list.appendChild(renderCard(c.name, c.img)));
     }
 
-    // Initial load
     displayCakes();
   </script>
 </body>
