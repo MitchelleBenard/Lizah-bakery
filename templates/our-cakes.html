@@ -221,7 +221,7 @@
     <div id="cakeList" class="cake-list"></div>
 
     <div class="custom-order">
-      <a href="{{ url_for('order') }}">Order a Customized Cake</a>
+      <a href="order.html">Order a Customized Cake</a>
     </div>
   </div>
 
@@ -292,11 +292,13 @@
       const list = id("cakeList");
       list.innerHTML = "";
 
+      // Show the formed selection first
       if (category || occasion){
         const formedName = formedSelectionName(category, occasion);
         list.appendChild(renderCard(formedName, PLACEHOLDER));
       }
 
+      // Show matching cakes from the list
       const results = cakes.filter(c =>
         (category === "" || c.category === category) &&
         (occasion === "" || c.occasion === occasion)

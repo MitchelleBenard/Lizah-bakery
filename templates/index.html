@@ -7,7 +7,7 @@
   <meta name="description" content="ENM Kitchen - Order cakes online. Birthday cakes, vegan cakes, chocolate cakes, and more delivered to your door.">
   <meta name="keywords" content="cakes, baking, birthday cake, vegan cake, chocolate cake, ENM Kitchen, online cake order">
   <meta name="author" content="ENM Kitchen">
-  
+
   <style>
     :root{
       --brown-900:#2f1b12;
@@ -66,7 +66,6 @@
       background: var(--gold);
     }
 
-    /* Hero */
     .hero {
       position: relative;
       height: 600px;
@@ -124,7 +123,6 @@
       transform: translateY(-2px);
     }
 
-    /* Sections */
     section { padding: 80px 20px; }
     .section-wrap { max-width: 1200px; margin: 0 auto; text-align: center; }
     .section-title {
@@ -146,7 +144,6 @@
       color: #fff;
     }
 
-    /* Cakes */
     .cakes-section { background-color: #3b2a1a; padding: 40px 20px; }
     .section-heading { color: #fff8dc; font-size: 2.5rem; margin-bottom: 30px; }
     .cakes-grid {
@@ -185,7 +182,6 @@
     .cake-card button:hover { background: #b8860b; color:#fff; }
     .call-number { margin-top: 10px; color: #333; }
 
-    /* CTA Section */
     .cta { background: #3e2723; padding: 60px 20px; text-align: center; }
     .cta p { color: #fffdf9; font-size: 1.8rem; margin: 12px 0 0; font-weight: 600; }
     .cta-buttons { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-top: 26px; }
@@ -202,7 +198,6 @@
     .cta-btn img { width: 40px; height: 40px; }
     .cta-btn:hover { transform: translateY(-2px); }
 
-    /* Responsive */
     @media screen and (max-width: 768px) {
       .hero-content { padding: 16px 16px; max-width: 90%; text-align:center; }
       .hero h1 { font-size: 2rem; }
@@ -225,7 +220,7 @@
 <body>
 
 <header>
-  <img src="{{ url_for('static', filename='images/logo.png') }}" alt="ENM Kitchen Logo" class="logo">
+  <img src="static/images/logo.png" alt="ENM Kitchen Logo" class="logo">
   <nav>
     <ul>
       <li><a href="#home">Home</a></li>
@@ -237,11 +232,11 @@
 </header>
 
 <section class="hero">
-  <img src="{{ url_for('static', filename='images/cake.jpg') }}" alt="Hero Cake">
+  <img src="static/images/cake.jpg" alt="Hero Cake">
   <div class="hero-content">
     <h1>Welcome to ENM Kitchen</h1>
     <p class="slogan">Master in my own craft</p>
-    <a href="{{ url_for('order') }}" class="order-now-btn">Order Customized Cake Now</a>
+    <a href="order.html" class="order-now-btn">Order Customized Cake Now</a>
   </div>
 </section>
 
@@ -261,7 +256,7 @@
   <h1 class="section-heading">Our Cakes</h1>
   <div class="cakes-grid">
     <div class="cake-card">
-      <img src="{{ url_for('static', filename='images/cake1.jpg') }}" alt="Birthday Fun Cake">
+      <img src="static/images/cake1.jpg" alt="Birthday Fun Cake">
       <h3>Birthday Fun Cake</h3>
       <a href="https://wa.me/254113211652?text=Hi%20I%20want%20to%20order%20Birthday%20Fun%20Cake" target="_blank">
         <button>Order on WhatsApp</button>
@@ -270,7 +265,7 @@
     </div>
 
     <div class="cake-card">
-      <img src="{{ url_for('static', filename='images/cake2.jpg') }}" alt="Wedding Bliss Cake">
+      <img src="static/images/cake2.jpg" alt="Wedding Bliss Cake">
       <h3>Wedding Bliss Cake</h3>
       <a href="https://wa.me/254113211652?text=Hi%20I%20want%20to%20order%20Wedding%20Bliss%20Cake" target="_blank">
         <button>Order on WhatsApp</button>
@@ -279,7 +274,7 @@
     </div>
 
     <div class="cake-card">
-      <img src="{{ url_for('static', filename='images/cake3.jpg') }}" alt="Chocolate Delight Cake">
+      <img src="static/images/cake3.jpg" alt="Chocolate Delight Cake">
       <h3>Chocolate Delight Cake</h3>
       <a href="https://wa.me/254113211652?text=Hi%20I%20want%20to%20order%20Chocolate%20Delight%20Cake" target="_blank">
         <button>Order on WhatsApp</button>
@@ -288,7 +283,7 @@
     </div>
 
     <div class="cake-card">
-      <img src="{{ url_for('static', filename='images/cake4.jpg') }}" alt="Vegan Special Cake">
+      <img src="static/images/cake4.jpg" alt="Vegan Special Cake">
       <h3>Vegan Special Cake</h3>
       <a href="https://wa.me/254113211652?text=Hi%20I%20want%20to%20order%20Vegan%20Special%20Cake" target="_blank">
         <button>Order on WhatsApp</button>
@@ -297,7 +292,7 @@
     </div>
 
     <div class="cake-card">
-      <img src="{{ url_for('static', filename='images/cake5.jpg') }}" alt="Pound Cake">
+      <img src="static/images/cake5.jpg" alt="Pound Cake">
       <h3>Pound Cake</h3>
       <a href="https://wa.me/254113211652?text=Hi%20I%20want%20to%20order%20Pound%20Cake" target="_blank">
         <button>Order on WhatsApp</button>
@@ -306,7 +301,7 @@
     </div>
 
     <div class="cake-card">
-      <img src="{{ url_for('static', filename='images/cake6.jpg') }}" alt="Eggless Chocolate Cake">
+      <img src="static/images/cake6.jpg" alt="Eggless Chocolate Cake">
       <h3>Eggless Chocolate Cake</h3>
       <a href="https://wa.me/254113211652?text=Hi%20I%20want%20to%20order%20Eggless%20Chocolate%20Cake" target="_blank">
         <button>Order on WhatsApp</button>
@@ -315,7 +310,7 @@
     </div>
 
     <div class="cake-card">
-      <img src="{{ url_for('static', filename='images/cake7.jpg') }}" alt="Kids Fun Cake">
+      <img src="static/images/cake7.jpg" alt="Kids Fun Cake">
       <h3>Kids Fun Cake</h3>
       <a href="https://wa.me/254113211652?text=Hi%20I%20want%20to%20order%20Kids%20Fun%20Cake" target="_blank">
         <button>Order on WhatsApp</button>
@@ -324,7 +319,7 @@
     </div>
 
     <div class="cake-card">
-      <img src="{{ url_for('static', filename='images/cake8.jpg') }}" alt="Birthday Chocolate Cake">
+      <img src="static/images/cake8.jpg" alt="Birthday Chocolate Cake">
       <h3>Birthday Chocolate Cake</h3>
       <a href="https://wa.me/254113211652?text=Hi%20I%20want%20to%20order%20Birthday%20Chocolate%20Cake" target="_blank">
         <button>Order on WhatsApp</button>
@@ -333,7 +328,7 @@
     </div>
 
     <div class="cake-card">
-      <img src="{{ url_for('static', filename='images/cake9.jpg') }}" alt="Classic Vanilla Cake">
+      <img src="static/images/cake9.jpg" alt="Classic Vanilla Cake">
       <h3>Classic Vanilla Cake</h3>
       <a href="https://wa.me/254113211652?text=Hi%20I%20want%20to%20order%20Classic%20Vanilla%20Cake" target="_blank">
         <button>Order on WhatsApp</button>
@@ -342,7 +337,7 @@
     </div>
 
     <div class="cake-card">
-      <img src="{{ url_for('static', filename='images/cake10.jpg') }}" alt="Special Occasion Cake">
+      <img src="static/images/cake10.jpg" alt="Special Occasion Cake">
       <h3>Special Occasion Cake</h3>
       <a href="https://wa.me/254113211652?text=Hi%20I%20want%20to%20order%20Special%20Occasion%20Cake" target="_blank">
         <button>Order on WhatsApp</button>
@@ -351,7 +346,7 @@
     </div>
 
     <div class="cake-card">
-      <img src="{{ url_for('static', filename='images/cake11.jpg') }}" alt="Chocolate Fudge Cake">
+      <img src="static/images/cake11.jpg" alt="Chocolate Fudge Cake">
       <h3>Chocolate Fudge Cake</h3>
       <a href="https://wa.me/254113211652?text=Hi%20I%20want%20to%20order%20Chocolate%20Fudge%20Cake" target="_blank">
         <button>Order on WhatsApp</button>
@@ -360,7 +355,7 @@
     </div>
 
     <div class="cake-card">
-      <img src="{{ url_for('static', filename='images/cake12.jpg') }}" alt="Carrot Cake">
+      <img src="static/images/cake12.jpg" alt="Carrot Cake">
       <h3>Carrot Cake</h3>
       <a href="https://wa.me/254113211652?text=Hi%20I%20want%20to%20order%20Carrot%20Cake" target="_blank">
         <button>Order on WhatsApp</button>
@@ -369,7 +364,7 @@
     </div>
 
     <div class="cake-card">
-      <img src="{{ url_for('static', filename='images/cake13.jpg') }}" alt="Wedding Chocolate Cake">
+      <img src="static/images/cake13.jpg" alt="Wedding Chocolate Cake">
       <h3>Wedding Chocolate Cake</h3>
       <a href="https://wa.me/254113211652?text=Hi%20I%20want%20to%20order%20Wedding%20Chocolate%20Cake" target="_blank">
         <button>Order on WhatsApp</button>
@@ -385,16 +380,16 @@
     <p>Stay connected and never miss a bite! Follow us or place your order now.</p>
     <div class="cta-buttons">
       <a href="https://wa.me/254113211652" target="_blank" class="cta-btn">
-        <img src="{{ url_for('static', filename='images/whatsapp.jpg') }}" alt="WhatsApp"> WhatsApp
+        <img src="static/images/whatsapp.jpg" alt="WhatsApp"> WhatsApp
       </a>
       <a href="https://www.instagram.com/enmkitchen" target="_blank" class="cta-btn">
-        <img src="{{ url_for('static', filename='images/instagram.jpg') }}" alt="Instagram"> Instagram
+        <img src="static/images/instagram.jpg" alt="Instagram"> Instagram
       </a>
       <a href="https://www.tiktok.com/@enmkitchen" target="_blank" class="cta-btn">
-        <img src="{{ url_for('static', filename='images/tiktok.jpg') }}" alt="TikTok"> TikTok
+        <img src="static/images/tiktok.jpg" alt="TikTok"> TikTok
       </a>
       <a href="https://www.facebook.com/@enmkitchen" target="_blank" class="cta-btn">
-        <img src="{{ url_for('static', filename='images/facebook.jpg') }}" alt="Facebook"> Facebook
+        <img src="static/images/facebook.jpg" alt="Facebook"> Facebook
       </a>
     </div>
   </div>
@@ -402,6 +397,7 @@
 
 </body>
 </html>
+
 
 
 
