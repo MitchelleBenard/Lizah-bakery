@@ -1,24 +1,17 @@
 from flask import Flask, request, render_template, redirect, url_for, abort, Response
 from jinja2 import TemplateNotFound
 import os
+import sqlite3
 import urllib.parse
 import requests
-import sqlite3  # database
-
-# --- Optional .env support ---
-try:
-    from dotenv import load_dotenv
-    load_dotenv()
-except Exception:
-    pass
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.secret_key = os.getenv("SECRET_KEY", "dev")
 
 # --- Settings ---
-WHATSAPP_PHONE = os.getenv("WHATSAPP_PHONE")
-WHATSAPP_API_KEY = os.getenv("WHATSAPP_API_KEY")
+WHATSAPP_PHONE = os.getenv("WHATSAPP_PHONE", "254113211652")
+WHATSAPP_API_KEY = os.getenv("WHATSAPP_API_KEY", "123456")
 
 FIELDS = [
     "client", "phone", "cake_flavour", "size", "colour", "details", "icing",
@@ -26,7 +19,6 @@ FIELDS = [
     "amount", "deposit"
 ]
 
-# --- Database helper ---
 DB_FILE = "orders.db"
 
 def get_db_connection():
@@ -58,7 +50,6 @@ def init_db():
     conn.commit()
     conn.close()
 
-# --- Helper functions ---
 def format_order_message(data: dict) -> str:
     lines = ["--- New Cake Order ---"]
     for k in FIELDS:
@@ -68,20 +59,17 @@ def format_order_message(data: dict) -> str:
     return "\n".join(lines)
 
 def send_whatsapp_if_configured(message_text: str) -> None:
-    if not WHATSAPP_PHONE or not WHATSAPP_API_KEY:
-        print("ℹ️ WhatsApp not sent (missing API key).")
+    if not WHATSAPP_PHONE or not WHATSAPP_API_KEY or WHATSAPP_API_KEY == "123456":
+        print("ℹ️ WhatsApp not sent (missing/placeholder API key).")
         return
     try:
         encoded = urllib.parse.quote_plus(message_text)
-        url = (
-            "https://api.callmebot.com/whatsapp.php"
-            f"?phone={WHATSAPP_PHONE}&text={encoded}&apikey={WHATSAPP_API_KEY}"
-        )
+        url = f"https://api.callmebot.com/whatsapp.php?phone={WHATSAPP_PHONE}&text={encoded}&apikey={WHATSAPP_API_KEY}"
         r = requests.get(url, timeout=15)
         if r.status_code == 200:
             print("✅ WhatsApp message sent.")
         else:
-            print(f"❌ WhatsApp API returned status {r.status_code}: {r.text[:120]}")
+            print(f"❌ WhatsApp API returned {r.status_code}")
     except Exception as e:
         print(f"❌ WhatsApp sending failed: {e}")
 
@@ -103,11 +91,8 @@ def order():
     if request.method == "POST":
         data = {field: request.form.get(field, "") for field in FIELDS}
         message_text = format_order_message(data)
-        
-        # Send WhatsApp (only if credentials exist)
         send_whatsapp_if_configured(message_text)
-        
-        # Save to database
+
         conn = get_db_connection()
         conn.execute("""
             INSERT INTO orders (
@@ -127,24 +112,18 @@ def thank_you():
     try:
         return render_template("thank_you.html")
     except TemplateNotFound:
-        return (
-            "<h2>Thank you! Your order has been received.</h2>"
-            "<p><a href='/'>Back to Home</a> | <a href='/order'>Place another order</a></p>"
-        )
+        return "<h2>Thank you! Your order has been received.</h2><p><a href='/'>Back to Home</a></p>"
 
-# --- Admin-only view orders page ---
 @app.route("/view-orders")
 def view_orders():
     if request.args.get("admin") != "1":
-        abort(403)  # Forbidden
-    
+        abort(403)
     conn = get_db_connection()
     orders = conn.execute("SELECT * FROM orders").fetchall()
     conn.close()
     return render_template("view_orders.html", orders=orders)
 
-# --- Sitemap route ---
-@app.route("/sitemap.xml", methods=["GET"])
+@app.route("/sitemap.xml")
 def sitemap():
     try:
         with open("sitemap.xml", "r", encoding="utf-8") as f:
@@ -156,8 +135,8 @@ def sitemap():
 # --- Run App ---
 if __name__ == "__main__":
     init_db()
-    print("🚀 ENM Kitchen app running...")
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True)
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
 
 
 
