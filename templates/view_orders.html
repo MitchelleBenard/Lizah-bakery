@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Orders - Admin</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff8ee;
+            padding: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #5a3e2b;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #ff69b4;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #ffe4f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>All Cake Orders (Admin)</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Client Name</th>
+            <th>Phone Number</th>
+            <th>Cake Flavour</th>
+            <th>Size</th>
+            <th>Colour</th>
+            <th>Details</th>
+            <th>Icing</th>
+            <th>Delivery</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Location</th>
+            <th>Writings</th>
+            <th>Amount</th>
+            <th>Deposit</th>
+        </tr>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order['id'] }}</td>
+            <td>{{ order['client'] }}</td>
+            <td>{{ order['phone'] }}</td>
+            <td>{{ order['cake_flavour'] }}</td>
+            <td>{{ order['size'] }}</td>
+            <td>{{ order['colour'] }}</td>
+            <td>{{ order['details'] }}</td>
+            <td>{{ order['icing'] }}</td>
+            <td>{{ order['delivery'] }}</td>
+            <td>{{ order['date'] }}</td>
+            <td>{{ order['time'] }}</td>
+            <td>{{ order['location'] }}</td>
+            <td>{{ order['writings'] }}</td>
+            <td>{{ order['amount'] }}</td>
+            <td>{{ order['deposit'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

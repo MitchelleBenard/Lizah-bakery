@@ -1,0 +1,148 @@
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Body */
+body {
+  line-height: 1.6;
+  font-size: 18px;
+  background-color: #fffaf4;
+  color: #4a2e14;
+}
+
+/* Header */
+.header {
+  background-color: #6b3e26;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.logo {
+  width: 200px; /* Larger logo */
+  height: auto;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+/* Hero Section */
+.hero {
+  background: url('images/hero-cake.jpg') no-repeat center center/cover;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-content {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  color: #4a2e14;
+}
+
+.slogan {
+  font-size: 1.5rem;
+  margin: 10px 0 20px;
+  color: #6b3e26;
+}
+
+.btn {
+  background-color: #e8ba65;
+  color: #4a2e14;
+  padding: 12px 24px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #dba24b;
+}
+
+/* About Section */
+.about {
+  padding: 60px 30px;
+  text-align: center;
+  background-color: #fff3e6;
+}
+
+.about h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+/* Cakes Section */
+.cakes {
+  padding: 50px 30px;
+  text-align: center;
+  background-color: #fffaf4;
+}
+
+.cakes h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.cake-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.cake-card {
+  width: 220px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.cake-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.cake-card h3 {
+  font-size: 20px;
+  padding: 10px;
+  background-color: #fdf2e9;
+  color: #4a2e14;
+}
+
+/* Footer */
+.footer {
+  padding: 40px 20px;
+  background-color: #6b3e26;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+}

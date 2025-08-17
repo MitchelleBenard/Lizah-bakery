@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENM Kitchen | Order Cakes Online</title>
+    <meta name="description" content="ENM Kitchen - Order birthday cakes, vegan cakes, chocolate cakes, and more online. Delivered to your door.">
+    <meta name="keywords" content="cakes, online cake order, birthday cake, vegan cake, chocolate cake, ENM Kitchen, cake delivery">
+    <meta name="author" content="ENM Kitchen">
+
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #fff8ee; 
+            padding: 40px; 
+            font-size: 18px; 
+        }
+
+        label { 
+            display: block; 
+            margin-top: 10px; 
+            font-size: 18px; 
+        }
+
+        input, textarea, select { 
+            width: 100%; 
+            padding: 10px; 
+            margin-top: 5px; 
+            font-size: 16px; 
+        }
+
+        button { 
+            margin-top: 20px; 
+            padding: 15px 20px; 
+            background: #ff69b4; 
+            border: none; 
+            color: white; 
+            cursor: pointer; 
+            font-size: 18px; 
+        }
+
+        button:hover { 
+            background: #ff4da6; 
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Cake Order Form</h2>
+    <form method="POST" action="/order">
+        <!-- Client Info -->
+        <label>Client Name:</label>
+        <input type="text" name="client" placeholder="Your full name" required>
+
+        <label>Phone Number:</label>
+        <input type="tel" name="phone" placeholder="07XXXXXXXX" required>
+
+        <!-- Cake Details -->
+        <label>Cake Flavour:</label>
+        <input type="text" name="cake_flavour" placeholder="Chocolate, Vanilla, Red Velvet..." required>
+
+        <label>Size:</label>
+        <input type="text" name="size" placeholder="Small, Medium, Large..." required>
+
+        <label>Colour:</label>
+        <input type="text" name="colour" placeholder="Your preferred color">
+
+        <label>Details:</label>
+        <textarea name="details" placeholder="Any special instructions"></textarea>
+
+        <label>Icing:</label>
+        <select name="icing">
+            <option value="">--Select Icing--</option>
+            <option value="Buttercream">Buttercream</option>
+            <option value="Fondant">Fondant</option>
+            <option value="Whipped Cream">Whipped Cream</option>
+            <option value="Chocolate Ganache">Chocolate Ganache</option>
+        </select>
+
+        <label>Delivery Method:</label>
+        <select name="delivery">
+            <option value="">--Select Delivery--</option>
+            <option value="Pickup">Pickup</option>
+            <option value="Home Delivery">Home Delivery</option>
+        </select>
+
+        <label>Date:</label>
+        <input type="date" name="date" required>
+
+        <label>Time:</label>
+        <input type="time" name="time" required>
+
+        <label>Location:</label>
+        <input type="text" name="location" placeholder="Address for delivery if home delivery">
+
+        <label>Writings on Cake:</label>
+        <input type="text" name="writings" placeholder="Happy Birthday, Congrats, etc.">
+
+        <label>Amount (Ksh):</label>
+        <input type="number" name="amount" placeholder="Total cake amount" required>
+
+        <label>Deposit (Ksh):</label>
+        <input type="number" name="deposit" placeholder="Enter deposit amount (optional)">
+
+        <button type="submit">Submit Order</button>
+    </form>
+</body>
+</html>
+
+
+

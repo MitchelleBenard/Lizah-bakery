@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>ENM Kitchen – Our Cakes</title>
+  <style>
+    /* ----- Base ----- */
+    :root{
+      --brown:#4b2e1e;
+      --tan:#e6d3b3;
+      --accent:#8b4513;
+    }
+    html, body {
+      background:#ffffff;           /* White page */
+      color:#2b2b2b;
+      margin:0;
+      padding:0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:30px;               /* 30+ base font as requested */
+      line-height:1.35;
+    }
+    .page {
+      padding:28px 24px 60px 24px;  /* left aligned layout */
+      max-width:1100px;             /* readable line length */
+    }
+
+    /* ----- Header + Note ----- */
+    h1 {
+      margin:0 0 8px 0;
+      color:var(--brown);
+      font-size:56px;               /* big headline */
+      font-weight:800;
+      letter-spacing:.5px;
+    }
+    .page-note{
+      margin:0 0 24px 0;
+      color:#594a40;
+      font-size:32px;
+    }
+
+    /* ----- Filters ----- */
+    .filters{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px 18px;
+      align-items:center;
+      margin: 8px 0 20px 0;
+    }
+    .filter-group{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    label{
+      color:#3a2a20;
+      font-size:32px;
+      font-weight:700;
+    }
+    select{
+      font-size:32px;               /* big controls */
+      padding:12px 18px;
+      border:2px solid var(--tan);
+      border-radius:12px;
+      background:#fff;
+      color:#2b2b2b;
+      cursor:pointer;
+    }
+    .btn{
+      font-size:30px;
+      padding:12px 18px;
+      border-radius:12px;
+      border:2px solid var(--accent);
+      background:var(--accent);
+      color:#fff;
+      cursor:pointer;
+    }
+    .btn.secondary{
+      background:#fff;
+      color:var(--accent);
+    }
+
+    /* ----- Cake List (vertical stack) ----- */
+    .cake-list{
+      display:flex;
+      flex-direction:column;        /* vertical arrangement */
+      gap:18px;
+      align-items:flex-start;       /* left aligned */
+      margin-top:10px;
+    }
+    .cake-card{
+      width:100%;
+      max-width:980px;              /* neat readable width */
+      display:grid;
+      grid-template-columns: 220px 1fr auto; /* image | name | actions */
+      gap:18px;
+      align-items:center;
+      background:#fff;
+      border:2px solid var(--tan);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 6px 16px rgba(0,0,0,.06);
+    }
+    .cake-card img{
+      width:220px;
+      height:160px;
+      object-fit:cover;
+      border-radius:14px;
+      background:#f7f7f7;
+      border:1px solid #eee;
+    }
+    .cake-card h3{
+      margin:0;
+      color:#2e2018;
+      font-size:36px;               /* big names */
+      font-weight:800;
+    }
+    .order-actions{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      justify-self:end;
+    }
+    .order-actions a{
+      text-decoration:none;
+      display:inline-block;
+      text-align:center;
+      padding:10px 14px;
+      border-radius:12px;
+      font-size:30px;
+      border:2px solid var(--accent);
+      color:#fff;
+      background:var(--accent);
+      min-width:210px;
+    }
+    .order-actions a.call{
+      background:#fff;
+      color:var(--accent);
+    }
+
+    /* ----- Footer CTA ----- */
+    .custom-order{
+      margin-top:26px;
+    }
+    .custom-order a{
+      text-decoration:none;
+      background:var(--brown);
+      color:#fff;
+      padding:14px 20px;
+      border-radius:14px;
+      font-size:32px;
+      display:inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>ENM Kitchen – Our Cakes</h1>
+    <p class="page-note">
+      Use one or both filters below. We’ll create a cake card with the name formed from your selection,
+      and also list any matching options. Tap WhatsApp or Call to order.
+    </p>
+
+    <!-- Filters -->
+    <div class="filters">
+      <div class="filter-group">
+        <label for="categoryFilter">Category:</label>
+        <select id="categoryFilter" onchange="displayCakes()">
+          <option value="">All</option>
+          <option value="bread">Bread</option>
+          <option value="cupcake">Cupcakes</option>
+          <option value="pound">Pound Cakes</option>
+          <option value="vegan">Vegan Cakes</option>
+          <option value="eggless">Eggless Cakes</option>
+          <option value="chocolate">Chocolate Cakes</option>
+          <option value="fruit">Fruit Cakes</option>
+          <option value="cheesecake">Cheesecakes</option>
+          <option value="tart">Tarts</option>
+          <option value="cookie">Cookies</option>
+          <option value="muffin">Muffins</option>
+          <option value="glutenfree">Gluten-Free</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="occasionFilter">Occasion:</label>
+        <select id="occasionFilter" onchange="displayCakes()">
+          <option value="">All</option>
+          <option value="birthday">Birthday</option>
+          <option value="wedding">Wedding</option>
+          <option value="anniversary">Anniversary</option>
+          <option value="graduation">Graduation</option>
+          <option value="babyshower">Baby Shower</option>
+          <option value="corporate">Corporate</option>
+          <option value="valentines">Valentine’s</option>
+          <option value="mothersday">Mother’s Day</option>
+          <option value="fathersday">Father’s Day</option>
+          <option value="christmas">Christmas</option>
+          <option value="engagement">Engagement</option>
+          <option value="kids">Kids</option>
+        </select>
+      </div>
+
+      <button class="btn secondary" onclick="clearFilters()">Clear</button>
+    </div>
+
+    <!-- Cards -->
+    <div id="cakeList" class="cake-list"></div>
+
+    <!-- Bottom CTA (Flask route ready) -->
+    <div class="custom-order">
+      <a href="{{ url_for('order') }}">Order a Customized Cake</a>
+    </div>
+  </div>
+
+  <script>
+    // --- Sample catalog (increased items) ---
+    const cakes = [
+      { name:"Chocolate Birthday Cake", category:"chocolate", occasion:"birthday", img:"images/chocolate_birthday.jpg" },
+      { name:"Vanilla Wedding Cake", category:"glutenfree", occasion:"wedding", img:"images/vanilla_wedding.jpg" },
+      { name:"Strawberry Fruit Cake", category:"fruit", occasion:"anniversary", img:"images/strawberry_fruit.jpg" },
+      { name:"Lemon Pound Cake", category:"pound", occasion:"graduation", img:"images/lemon_pound.jpg" },
+      { name:"Vegan Red Velvet", category:"vegan", occasion:"birthday", img:"images/vegan_red_velvet.jpg" },
+      { name:"Eggless Black Forest", category:"eggless", occasion:"birthday", img:"images/eggless_black_forest.jpg" },
+      { name:"Classic Cheesecake", category:"cheesecake", occasion:"corporate", img:"images/cheesecake_classic.jpg" },
+      { name:"Blueberry Cheesecake", category:"cheesecake", occasion:"mothersday", img:"images/blueberry_cheesecake.jpg" },
+      { name:"Fruit Tart Assortment", category:"tart", occasion:"valentines", img:"images/fruit_tart.jpg" },
+      { name:"Banana Bread Loaf", category:"bread", occasion:"breakfast", img:"images/banana_bread.jpg" },
+      { name:"Chocolate Chip Cookies", category:"cookie", occasion:"corporate", img:"images/cookies.jpg" },
+      { name:"Chocolate Muffins", category:"muffin", occasion:"kids", img:"images/choc_muffins.jpg" },
+      { name:"Red Velvet Cupcakes", category:"cupcake", occasion:"birthday", img:"images/redvelvet_cupcakes.jpg" },
+      { name:"Fruit Wedding Cake", category:"fruit", occasion:"wedding", img:"images/fruit_wedding.jpg" },
+      { name:"Gluten-Free Vanilla Cake", category:"glutenfree", occasion:"anniversary", img:"images/glutenfree_vanilla.jpg" },
+      { name:"Chocolate Drip Engagement Cake", category:"chocolate", occasion:"engagement", img:"images/choc_drip.jpg" },
+      { name:"Vanilla Kids Cupcakes", category:"cupcake", occasion:"kids", img:"images/vanilla_cupcakes.jpg" },
+      { name:"Orange Pound Cake", category:"pound", occasion:"christmas", img:"images/orange_pound.jpg" }
+    ];
+
+    const WA_NUMBER = "254113211652";
+    const CALL_NUMBER = "0113211652";
+    const PLACEHOLDER = "images/placeholder.jpg";
+
+    const id = s => document.getElementById(s);
+    const titleCase = s => s.replace(/[-_]/g," ").replace(/\b\w/g, m => m.toUpperCase());
+
+    function buildWhatsAppLink(cakeName){
+      const msg = `I want to order ${cakeName}`;
+      return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+    }
+
+    function renderCard(name, img){
+      const card = document.createElement("div");
+      card.className = "cake-card";
+      card.innerHTML = `
+        <img src="${img || PLACEHOLDER}" alt="${name}">
+        <h3>${name}</h3>
+        <div class="order-actions">
+          <a class="wa" href="${buildWhatsAppLink(name)}" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="call" href="tel:${CALL_NUMBER}">Call</a>
+        </div>
+      `;
+      return card;
+    }
+
+    function formedSelectionName(categoryVal, occasionVal){
+      const parts = [];
+      if (categoryVal) parts.push(titleCase(categoryVal));
+      if (occasionVal) parts.push(titleCase(occasionVal));
+      return (parts.length ? parts.join(" ") : "Customized") + " Cake";
+    }
+
+    function clearFilters(){
+      id("categoryFilter").value = "";
+      id("occasionFilter").value = "";
+      displayCakes();
+    }
+
+    function displayCakes(){
+      const category = id("categoryFilter").value;
+      const occasion = id("occasionFilter").value;
+      const list = id("cakeList");
+      list.innerHTML = "";
+
+      // 1) Always create a formed card when at least one filter is chosen
+      if (category || occasion){
+        const formedName = formedSelectionName(category, occasion);
+        list.appendChild(renderCard(formedName, PLACEHOLDER));
+      }
+
+      // 2) Show matching catalog items (works with both filters, or one, or none)
+      const results = cakes.filter(c =>
+        (category === "" || c.category === category) &&
+        (occasion === "" || c.occasion === occasion)
+      );
+
+      // If no filters selected, results == all cakes (so page looks full)
+      results.forEach(c => list.appendChild(renderCard(c.name, c.img)));
+    }
+
+    // Initial load
+    displayCakes();
+  </script>
+</body>
+</html>
+
+
+
