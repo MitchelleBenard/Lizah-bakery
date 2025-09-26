@@ -1,97 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>View Orders - Admin</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #fff8ee;
-            margin: 0;
-            padding: 20px;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 10px;
-        }
-
-        .table-wrapper {
-            overflow-x: auto;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            min-width: 800px;
-        }
-
-        th, td {
-            border: 1px solid #5a3e2b;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #ff69b4;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #ffe4f0;
-        }
-
-        @media screen and (max-width: 768px) {
-            body { font-size: 14px; padding: 10px; }
-            table th, table td { padding: 6px; font-size: 14px; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>All Cake Orders (Admin)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { text-align: center; color: #6b4226; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background: #f2f2f2; }
+    tr:nth-child(even) { background: #f9f9f9; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>All Cake Orders (Admin)</h1>
-        <div class="table-wrapper">
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Client Name</th>
-                    <th>Phone Number</th>
-                    <th>Cake Flavour</th>
-                    <th>Size</th>
-                    <th>Colour</th>
-                    <th>Details</th>
-                    <th>Icing</th>
-                    <th>Delivery</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Location</th>
-                    <th>Writings</th>
-                    <th>Deposit</th>
-                </tr>
-                {% for order in orders %}
-                <tr>
-                    <td>{{ order['id'] }}</td>
-                    <td>{{ order['client'] }}</td>
-                    <td>{{ order['phone'] }}</td>
-                    <td>{{ order['cake_flavour'] }}</td>
-                    <td>{{ order['size'] }}</td>
-                    <td>{{ order['colour'] }}</td>
-                    <td>{{ order['details'] }}</td>
-                    <td>{{ order['icing'] }}</td>
-                    <td>{{ order['delivery'] }}</td>
-                    <td>{{ order['date'] }}</td>
-                    <td>{{ order['time'] }}</td>
-                    <td>{{ order['location'] }}</td>
-                    <td>{{ order['writings'] }}</td>
-                    <td>{{ order['deposit'] }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </div>
+  <h1>All Cake Orders (Admin)</h1>
+
+  {% if orders %}
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Phone Number</th>
+        <th>Cake Flavour</th>
+        <th>Size</th>
+        <th>Colour</th>
+        <th>Details</th>
+        <th>Icing</th>
+        <th>Delivery</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Location</th>
+        <th>Writings</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+      <tr>
+        <td>{{ order['id'] }}</td>
+        <td>{{ order['client'] }}</td>
+        <td>{{ order['phone'] }}</td>
+        <td>{{ order['cake_flavour'] }}</td>
+        <td>{{ order['size'] }}</td>
+        <td>{{ order['colour'] }}</td>
+        <td>{{ order['details'] }}</td>
+        <td>{{ order['icing'] }}</td>
+        <td>{{ order['delivery'] }}</td>
+        <td>{{ order['date'] }}</td>
+        <td>{{ order['time'] }}</td>
+        <td>{{ order['location'] }}</td>
+        <td>{{ order['writings'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <p style="text-align:center;">No orders yet.</p>
+  {% endif %}
 </body>
 </html>
-

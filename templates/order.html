@@ -5,92 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ENM Kitchen | Order Cakes Online</title>
     <meta name="description" content="Order cakes online from ENM Kitchen. Birthday cakes, vegan cakes, chocolate cakes, and more delivered to your door.">
-    <meta name="keywords" content="cakes, cake order online, birthday cake, vegan cake, chocolate cake, cake delivery, custom cakes, ENM Kitchen">
     <meta name="author" content="ENM Kitchen">
 
-    <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            background-color: #fff8ee; 
-            margin:0;
-            padding: 20px; 
-            font-size: 16px; 
-            line-height:1.5;
-            box-sizing:border-box;
-        }
+   <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5e6d3; /* light brown */
+        margin:0;
+        padding: 20px;
+        font-size: 16px;
+        line-height:1.5;
+        box-sizing:border-box;
+    }
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
 
+    h2 {
+        font-size: 2em;
+        color: #4b2e1e;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+        font-size: 1em;
+    }
+
+    input, textarea, select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        font-size: 1em;
+        border:1px solid #ccc;
+        border-radius:6px;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 15px 20px;
+        background: #a0522d; /* brown button */
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 1em;
+        border-radius:8px;
+        transition: background 0.3s ease;
+    }
+
+    button:hover {
+        background: #7b3f1d;
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-top: 15px;
+        text-decoration: none;
+        color: #4b2e1e;
+        font-weight: bold;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
+    }
+
+    @media screen and (max-width: 600px) {
+        body {
+            font-size: 14px;
+            padding: 10px;
+        }
         h2 {
-            font-size: 2em;
-            color: #4b2e1e;
-            margin-bottom: 20px;
+            font-size: 1.5em;
         }
-
-        label { 
-            display: block; 
-            margin-top: 10px; 
-            font-weight: bold;
-            font-size: 1em; 
+        button {
+            padding: 12px;
+            font-size: 0.95em;
         }
-
-        input, textarea, select { 
-            width: 100%; 
-            padding: 10px; 
-            margin-top: 5px; 
-            font-size: 1em; 
-            border:1px solid #ccc;
-            border-radius:6px;
-            box-sizing: border-box;
-        }
-
-        textarea { 
-            resize: vertical; 
-            min-height: 80px; 
-        }
-
-        button { 
-            margin-top: 20px; 
-            padding: 15px 20px; 
-            background: #ff69b4; 
-            border: none; 
-            color: white; 
-            cursor: pointer; 
-            font-size: 1em; 
-            border-radius:8px;
-            transition: background 0.3s ease;
-        }
-
-        button:hover { 
-            background: #ff4da6; 
-        }
-
-        @media screen and (max-width: 600px) {
-            body {
-                font-size: 14px;
-                padding: 10px;
-            }
-            h2 {
-                font-size: 1.5em;
-            }
-            button {
-                padding: 12px;
-                font-size: 0.95em;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 
 <body>
    <div class="container">
     <h2>Cake Order Form</h2>
-    <form method="POST" action="/order">
+
+    <!-- POST to the /order route that your Flask app defines -->
+    <form method="POST" action="{{ url_for('order') }}">
+
         <!-- Client Info -->
-        <label for="client">Client Name:</label>
+        <label for="client">Full Name:</label>
         <input type="text" id="client" name="client" placeholder="Your full name" required>
 
         <label for="phone">Phone Number:</label>
@@ -116,8 +130,6 @@
             <option value="Fondant">Fondant</option>
             <option value="Whipped Cream">Whipped Cream</option>
             <option value="Chocolate Ganache">Chocolate Ganache</option>
-            <option value="Chocolate Ganache Hard">Chocolate Ganache (Hard)</option>
-            <option value="Chocolate Ganache Soft">Chocolate Ganache (Soft)</option>
         </select>
 
         <label for="delivery">Delivery Method:</label>
@@ -139,17 +151,15 @@
         <label for="writings">Writings on Cake:</label>
         <input type="text" id="writings" name="writings" placeholder="Happy Birthday, Congrats, etc.">
 
-        <label for="deposit">Deposit (Ksh):</label>
-        <input type="number" id="deposit" name="deposit" placeholder="Enter deposit amount (optional)">
-
-        <button type="submit">Submit Order</button>
+<form method="POST" action="{{ url_for('order') }}">
+    <!-- form fields -->
+    <button type="submit">Submit Order</button>
+</form>
     </form>
+
+    <!-- back to home using Flask route -->
+    <a href="{{ url_for('home') }}" class="back-link">← Back to Home</a>
 </div>
 
 </body>
 </html>
-
-
-
-
-

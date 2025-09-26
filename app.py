@@ -13,16 +13,18 @@ app.secret_key = os.getenv("SECRET_KEY", "dev")
 WHATSAPP_PHONE = os.getenv("WHATSAPP_PHONE", "254113211652")
 WHATSAPP_API_KEY = os.getenv("WHATSAPP_API_KEY", "123456")
 
+# --- Fields ---
 FIELDS = [
     "client", "phone", "cake_flavour", "size", "colour", "details", "icing",
-    "delivery", "date", "time", "location", "writings",
-    "amount", "deposit"
+    "delivery", "date", "time", "location", "writings"
 ]
 
-DB_FILE = "orders.db"
+DB_FILE = os.getenv("ORDERS_DB", "orders.db")
 
+# --- Database helpers ---
 def get_db_connection():
-    conn = sqlite3.connect(DB_FILE)
+    # Added timeout to avoid "database is locked"
+    conn = sqlite3.connect(DB_FILE, timeout=10)
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -42,14 +44,13 @@ def init_db():
         date TEXT NOT NULL,
         time TEXT NOT NULL,
         location TEXT,
-        writings TEXT,
-        amount REAL NOT NULL,
-        deposit REAL
+        writings TEXT
     )
     """)
     conn.commit()
     conn.close()
 
+# --- WhatsApp helpers ---
 def format_order_message(data: dict) -> str:
     lines = ["--- New Cake Order ---"]
     for k in FIELDS:
@@ -60,18 +61,18 @@ def format_order_message(data: dict) -> str:
 
 def send_whatsapp_if_configured(message_text: str) -> None:
     if not WHATSAPP_PHONE or not WHATSAPP_API_KEY or WHATSAPP_API_KEY == "123456":
-        print("ℹ️ WhatsApp not sent (missing/placeholder API key).")
+        app.logger.info("WhatsApp not sent (missing/placeholder API key).")
         return
     try:
         encoded = urllib.parse.quote_plus(message_text)
         url = f"https://api.callmebot.com/whatsapp.php?phone={WHATSAPP_PHONE}&text={encoded}&apikey={WHATSAPP_API_KEY}"
         r = requests.get(url, timeout=15)
         if r.status_code == 200:
-            print("✅ WhatsApp message sent.")
+            app.logger.info("WhatsApp message sent.")
         else:
-            print(f"❌ WhatsApp API returned {r.status_code}")
+            app.logger.warning(f"WhatsApp API returned {r.status_code}: {r.text[:200]}")
     except Exception as e:
-        print(f"❌ WhatsApp sending failed: {e}")
+        app.logger.exception(f"WhatsApp sending failed: {e}")
 
 # --- Routes ---
 @app.route("/")
@@ -93,18 +94,20 @@ def order():
         message_text = format_order_message(data)
         send_whatsapp_if_configured(message_text)
 
-        conn = get_db_connection()
-        conn.execute("""
-            INSERT INTO orders (
-                client, phone, cake_flavour, size, colour, details, icing,
-                delivery, date, time, location, writings,
-                amount, deposit
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, [data[field] for field in FIELDS])
-        conn.commit()
-        conn.close()
-        
+        try:
+            with get_db_connection() as conn:
+                placeholders = ", ".join("?" for _ in FIELDS)
+                columns = ", ".join(FIELDS)
+                sql = f"INSERT INTO orders ({columns}) VALUES ({placeholders})"
+                values = [data[field] for field in FIELDS]
+                conn.execute(sql, values)
+                conn.commit()
+        except Exception as e:
+            app.logger.error(f"Error saving order: {e}")
+            return f"<h2>Error saving order: {e}</h2>", 500
+
         return redirect(url_for("thank_you"))
+
     return render_template("order.html")
 
 @app.route("/thank-you")
@@ -118,9 +121,8 @@ def thank_you():
 def view_orders():
     if request.args.get("admin") != "1":
         abort(403)
-    conn = get_db_connection()
-    orders = conn.execute("SELECT * FROM orders").fetchall()
-    conn.close()
+    with get_db_connection() as conn:
+        orders = conn.execute("SELECT * FROM orders ORDER BY id DESC").fetchall()
     return render_template("view_orders.html", orders=orders)
 
 @app.route("/sitemap.xml")
@@ -136,15 +138,4 @@ def sitemap():
 if __name__ == "__main__":
     init_db()
     port = int(os.environ.get("PORT", 8080))
-    app.run(host="0.0.0.0", port=port)
-
-
-
-
-
-
-
-
-
-
-
+    app.run(host="0.0.0.0", port=port, debug=True)
