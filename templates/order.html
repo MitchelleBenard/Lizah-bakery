@@ -100,9 +100,8 @@
    <div class="container">
     <h2>Cake Order Form</h2>
 
-    <!-- POST to the /order route that your Flask app defines -->
-    <form method="POST" action="{{ url_for('order') }}">
 
+    <form id="orderForm">
         <!-- Client Info -->
         <label for="client">Full Name:</label>
         <input type="text" id="client" name="client" placeholder="Your full name" required>
@@ -151,15 +150,40 @@
         <label for="writings">Writings on Cake:</label>
         <input type="text" id="writings" name="writings" placeholder="Happy Birthday, Congrats, etc.">
 
-<form method="POST" action="{{ url_for('order') }}">
-    <!-- form fields -->
-    <button type="submit">Submit Order</button>
-</form>
+        <button type="submit">Submit Order</button>
     </form>
 
     <!-- back to home using Flask route -->
     <a href="{{ url_for('home') }}" class="back-link">← Back to Home</a>
 </div>
 
+
+<script>
+// WhatsApp number (no +, no spaces)
+const whatsappNumber = "0113211652";
+const form = document.getElementById('orderForm');
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const data = new FormData(form);
+    let message = `--- New Cake Order ---\n`;
+    message += `Full Name: ${data.get('client')}\n`;
+    message += `Phone: ${data.get('phone')}\n`;
+    message += `Cake Flavour: ${data.get('cake_flavour')}\n`;
+    message += `Size: ${data.get('size')}\n`;
+    message += `Colour: ${data.get('colour')}\n`;
+    message += `Details: ${data.get('details')}\n`;
+    message += `Icing: ${data.get('icing')}\n`;
+    message += `Delivery: ${data.get('delivery')}\n`;
+    message += `Date: ${data.get('date')}\n`;
+    message += `Time: ${data.get('time')}\n`;
+    message += `Location: ${data.get('location')}\n`;
+    message += `Writings: ${data.get('writings')}\n`;
+    message += `----------------------`;
+    const encoded = encodeURIComponent(message);
+    // Use wa.me for mobile and web
+    const waUrl = `https://wa.me/254${whatsappNumber.replace(/^0/, '')}?text=${encoded}`;
+    window.open(waUrl, '_blank');
+});
+</script>
 </body>
 </html>
