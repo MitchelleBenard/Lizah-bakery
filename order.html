@@ -100,7 +100,6 @@
    <div class="container">
     <h2>Cake Order Form</h2>
 
-
     <form id="orderForm">
         <!-- Client Info -->
         <label for="client">Full Name:</label>
@@ -153,15 +152,15 @@
         <button type="submit">Submit Order</button>
     </form>
 
-    <!-- back to home using Flask route -->
-    <a href="{{ url_for('home') }}" class="back-link">← Back to Home</a>
+    <!-- ✅ Fixed back link (now works without Flask) -->
+    <a href="index.html" class="back-link">← Back to Home</a>
 </div>
-
 
 <script>
 // WhatsApp number (no +, no spaces)
 const whatsappNumber = "0113211652";
 const form = document.getElementById('orderForm');
+
 form.addEventListener('submit', function(e) {
     e.preventDefault();
     const data = new FormData(form);
@@ -179,8 +178,8 @@ form.addEventListener('submit', function(e) {
     message += `Location: ${data.get('location')}\n`;
     message += `Writings: ${data.get('writings')}\n`;
     message += `----------------------`;
+
     const encoded = encodeURIComponent(message);
-    // Use wa.me for mobile and web
     const waUrl = `https://wa.me/254${whatsappNumber.replace(/^0/, '')}?text=${encoded}`;
     window.open(waUrl, '_blank');
 });
