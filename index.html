@@ -1,172 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ENM Kitchen</title>
+  <meta name="description" content="ENM Kitchen - Order cakes online. Birthday cakes, vegan cakes, chocolate cakes, and more delivered to your door.">
+  <meta name="author" content="ENM Kitchen">
+
   <style>
+    :root {
+      --light-brown: #f5e6d3;
+      --brown-700: #8b5e3c;
+      --brown-900: #4e342e;
+      --accent: #d9a85a;
+      --cream: #fffaf4;
+      --header-h: 50px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #fff8f0;
-      color: #4b2e05;
-      scroll-behavior: smooth;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      background: var(--light-brown);
+      color: var(--brown-900);
+      padding-top: var(--header-h);
     }
 
     header {
-      background-color: #4b2e05;
-      color: #fcd34d;
-      padding: 20px;
-      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: var(--header-h);
+      background-color: var(--light-brown);
+      border-bottom: 1px solid #d3bfa7;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-      letter-spacing: 1px;
+    .logo {
+      width: 50px;
+      border-radius: 6px;
+      background: var(--cream);
+      padding: 2px;
     }
 
-    header p {
-      font-style: italic;
-      margin: 5px 0 0;
-      color: #fff7c2;
-    }
-
-    nav {
-      background-color: #fcd34d;
-      text-align: center;
-      padding: 10px 0;
-    }
-
+    nav ul { display: flex; gap: 10px; list-style: none; }
     nav a {
-      color: #4b2e05;
+      color: var(--brown-900);
       text-decoration: none;
-      margin: 0 20px;
       font-weight: bold;
+      font-size: 13px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: 0.3s;
     }
-
     nav a:hover {
-      text-decoration: underline;
+      background: var(--accent);
+      color: var(--brown-900);
     }
-
-    section {
-      padding: 50px 20px;
-      text-align: center;
+    .order-link {
+      background: var(--accent);
+      color: var(--brown-900);
+      font-weight: bold;
     }
 
     .hero {
-      background: url('static/images/cake1.jpg') center/cover no-repeat;
-      color: #fff;
-      padding: 100px 20px;
-      border-radius: 0 0 50px 50px;
+      margin: 20px auto;
+      max-width: 900px;
+      padding: 20px;
+      text-align: center;
     }
+    .hero h1 { font-size: 1.8rem; color: var(--brown-900); }
+    .slogan { font-style: italic; color: var(--brown-700); }
 
-    .hero h2 {
-      font-size: 2.5rem;
-      background-color: rgba(75, 46, 5, 0.7);
-      display: inline-block;
-      padding: 10px 20px;
+    section { padding: 30px 16px; }
+    .section-wrap { max-width: 1000px; margin: 0 auto; text-align: center; }
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--brown-900);
+      margin-bottom: 10px;
+    }
+    .title-underline {
+      width: 60px; height: 3px;
+      margin: 0 auto 18px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    .about-text { max-width: 700px; margin: 0 auto; }
+
+    .cakes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    .cake-card {
+      position: relative;
+      background: var(--cream);
       border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      transition: transform 0.3s;
+    }
+    .cake-card:hover { transform: translateY(-4px); }
+    .cake-card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+    .cake-card h3 {
+      padding: 8px;
+      font-size: 1rem;
+      color: var(--brown-900);
     }
 
-    .hero p {
-      margin-top: 15px;
-      font-size: 1.2rem;
-      background-color: rgba(252, 211, 77, 0.7);
-      display: inline-block;
-      padding: 5px 15px;
-      border-radius: 8px;
+    .cake-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: 0.3s;
+      color: white;
     }
-
-    .order-link {
-      display: inline-block;
-      margin-top: 30px;
-      background-color: #4b2e05;
-      color: #fcd34d;
-      padding: 12px 25px;
+    .cake-card:hover .cake-overlay { opacity: 1; }
+    .cake-overlay a {
+      background: #25d366;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      margin-top: 6px;
       text-decoration: none;
       font-weight: bold;
-      border-radius: 25px;
-      transition: 0.3s;
+      font-size: 0.9rem;
+    }
+    .cake-overlay a:hover { background: #1ebe57; }
+
+    .socials-inline {
+      text-align: center;
+      margin: 30px 0;
     }
 
-    .order-link:hover {
-      background-color: #fcd34d;
-      color: #4b2e05;
+    .socials-inline p {
+      margin-bottom: 10px;
+      color: var(--brown-900);
     }
 
-    .contact {
-      background-color: #fcd34d;
-      color: #4b2e05;
-      border-radius: 20px;
-      padding: 40px 20px;
-      margin: 50px 0;
+    .socials-inline a {
+      display: inline-block;
+      margin: 0 8px;
+      font-size: 14px;
+      text-decoration: none;
+      color: var(--brown-900);
+    }
+
+    .socials-inline a img {
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+      margin-right: 4px;
     }
 
     footer {
-      background-color: #4b2e05;
-      color: #fcd34d;
       text-align: center;
-      padding: 15px 0;
-      font-size: 0.9rem;
-      border-top: 3px solid #fcd34d;
+      padding: 20px;
+      font-size: 14px;
+      color: var(--brown-900);
     }
 
-    footer a {
-      color: #fcd34d;
-      text-decoration: none;
-      margin: 0 10px;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.3rem; }
+      nav a { font-size: 11px; padding: 3px 6px; }
+      .cakes-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>ENM Kitchen</h1>
-    <p>Master in my own craft</p>
+    <img src="static/images/logo.png" alt="ENM Kitchen Logo" class="logo">
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#cakes">Cakes</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <a href="order.html" class="order-link">ORDER CUSTOMIZED CAKE NOW</a>
+      </ul>
+    </nav>
   </header>
 
-  <nav>
-    <a href="#about">About</a>
-    <a href="#products">Products</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <section class="hero">
-    <h2>Freshly Baked Goodness</h2>
-    <p>We deliver delicious cakes and breads right to your doorstep.</p>
-    <a href="order.html" class="order-link">ORDER CUSTOMIZED CAKE NOW</a>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Welcome to ENM Kitchen</h1>
+      <p class="slogan">Master in my own craft</p>
+    </div>
   </section>
 
   <section id="about">
-    <h2>About Us</h2>
-    <p>At ENM Kitchen, we specialize in creating mouth-watering cakes, breads, and pastries. Whether you love chocolate, vegan treats, or eggless options — we bake it all with passion and perfection!</p>
+    <div class="section-wrap">
+      <h2 class="section-title">About Us</h2>
+      <div class="title-underline"></div>
+      <p class="about-text">
+        ENM Kitchen is an online-based bakery creating delicious homemade treats. 
+        From cupcakes to custom cakes, every bite is made with passion and precision.<br>
+        <strong>Crafted with love, for love, in love, by love.</strong>
+      </p>
+    </div>
   </section>
 
-  <section id="products">
-    <h2>Our Categories</h2>
-    <p>Breads | Cupcakes | Pound Cakes | Vegan Cakes | Eggless Cakes | Chocolate Cakes</p>
+  <section id="cakes">
+    <div class="section-wrap">
+      <h2 class="section-title">Our Cakes</h2>
+      <div class="cakes-grid" id="cakes-grid"></div>
+    </div>
   </section>
 
-  <section id="contact" class="contact">
-    <h2>Contact Us</h2>
-    <p>📞 0113211652</p>
-    <p>📧 enmkitchen408@gmail.com</p>
-    <p>🕘 9am – 10pm | Countrywide Delivery Available</p>
-    <p>💬 Order via WhatsApp or form below!</p>
-  </section>
+  <div class="socials-inline" id="contact">
+    <p>Stay connected — follow or order now:</p>
+    <a href="https://wa.me/254113211652" target="_blank" rel="noopener">
+      <img src="static/images/whatsapp.jpg" alt="WhatsApp"> WhatsApp
+    </a>
+    <a href="https://www.instagram.com/enmkitchen" target="_blank" rel="noopener">
+      <img src="static/images/instagram.jpg" alt="Instagram"> Instagram
+    </a>
+    <a href="https://www.tiktok.com/@enmkitchen" target="_blank" rel="noopener">
+      <img src="static/images/tiktok.jpg" alt="TikTok"> TikTok
+    </a>
+    <a href="https://www.facebook.com/@enmkitchen" target="_blank" rel="noopener">
+      <img src="static/images/facebook.jpg" alt="Facebook"> Facebook
+    </a>
+  </div>
 
   <footer>
-    <p>Follow us on social media: 
-      <a href="#">Facebook</a> | 
-      <a href="#">Instagram</a> | 
-      <a href="#">TikTok</a>
-    </p>
-    <p>© 2025 ENM Kitchen. All Rights Reserved.</p>
+    &copy; ENM Kitchen — All rights reserved
   </footer>
+
+  <script>
+    const phone = "254113211652";
+    const cakes = [
+      { src: "static/images/cake1.jpg", name: "Birthday Fun Cake" },
+      { src: "static/images/cake2.jpg", name: "Wedding Bliss Cake" },
+      { src: "static/images/cake3.jpg", name: "Chocolate Delight Cake" },
+      { src: "static/images/cake4.jpg", name: "Vegan Special Cake" },
+      { src: "static/images/cake5.jpg", name: "Pound Cake" },
+      { src: "static/images/cake6.jpg", name: "Eggless Chocolate Cake" },
+      { src: "static/images/cake7.jpg", name: "Kids Fun Cake" },
+      { src: "static/images/cake8.jpg", name: "Birthday Chocolate Cake" },
+      { src: "static/images/cake9.jpg", name: "Classic Vanilla Cake" },
+      { src: "static/images/cake10.jpg", name: "Special Occasion Cake" },
+      { src: "static/images/cake11.jpg", name: "Chocolate Fudge Cake" },
+      { src: "static/images/cake12.jpg", name: "Carrot Cake" },
+      { src: "static/images/cake13.jpg", name: "Wedding Chocolate Cake" }
+    ];
+
+    const cakesGrid = document.getElementById("cakes-grid");
+    cakes.forEach(cake => {
+      cakesGrid.innerHTML += `
+        <div class="cake-card">
+          <img src="${cake.src}" alt="${cake.name}">
+          <h3>${cake.name}</h3>
+          <div class="cake-overlay">
+            <p>📞 ${phone}</p>
+            <a target="_blank" href="https://wa.me/${phone}?text=I want to order: ${encodeURIComponent(cake.name)}">
+              Order on WhatsApp
+            </a>
+          </div>
+        </div>
+      `;
+    });
+  </script>
 </body>
 </html>
